@@ -1166,7 +1166,9 @@ int playSmithy(struct gameState *state, int player, int handPos)
     }
 
     //discard Smithy from hand
-    discardCard(handPos, player, state, 0);
+    //BUG: line edited to trash Smithy from hand instead of putting it into
+    //the played pile. You won't see Smithy in your deck ever again.
+    discardCard(handPos, player, state, 1);
     return 0;
 }
 
@@ -1214,7 +1216,8 @@ int playAdventurer(struct gameState *state, int player, int handPos)
             z++;
         }
     }
-    while(z-1>=0){
+    //BUG: change >= to >. One card will not be discarded and will be lost to trash
+    while(z-1>0){
         //discard all cards in play that have been drawn
         state->discard[player][state->discardCount[player]++]=temphand[z-1];
         z=z-1; 
@@ -1260,19 +1263,22 @@ int playMine(struct gameState *state, int arg1, int arg2, int player, int handPo
     {
         return -1;
     }
-    if (getCost(state->hand[player][arg1]) + 3 > getCost(arg2))
+    if ((getCost(state->hand[player][arg1]) + 3) > getCost(arg2))
     {
         return -1;
     }
  
     //gain treasure requested
     gainCard(arg2, state, 2, player);
- 
+    
     //discard mine card from hand
     discardCard(handPos, player, state, 0);
  
     //find treasure sacrificed and remove it
-    for (i = 0; i < state->handCount[player]; i++)
+    //BUG: i starts at 1 instead of 0. This means the first card of the hand
+    //won't be looked at to find the sacrificial treasure. Only a problem if
+    //the only sacrificial treasure is the one at the beginning of the hand.
+    for (i=1; i < state->handCount[player]; i++)
     {
         if (state->hand[player][i] == j)
         {
@@ -1341,7 +1347,10 @@ int playEmbargo(struct gameState *state, int arg1, int player, int handPos)
     }
 
     //add embargo token to selected supply pile
-    state->embargoTokens[arg1]++;
+    //BUG: edit made that sets embargo token to 1 instead of adding one. Embargo should
+    //be able to add as many tokens as it wants, this bug would require someone using
+    //embargo twice on the same pile to find the error.
+    state->embargoTokens[arg1] = 1;
 
     //remove embargo card from hand
     discardCard(handPos, player, state, 1);
@@ -1352,7 +1361,7 @@ int playEmbargo(struct gameState *state, int arg1, int player, int handPos)
 int discardCard(int handPos, int currentPlayer, struct gameState *state, int trashFlag)
 {
 	
-  //if card is not trashed, added to Played pile 
+  //if card is not trashed, add to Played pile 
   if (trashFlag < 1)
     {
       //add card to played pile
