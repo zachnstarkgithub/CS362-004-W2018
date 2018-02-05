@@ -323,10 +323,47 @@ int main(){
                     handPos = G.handCount[p] - 1;
                     G.hand[p][handPos] = smithy;
 
-                    r = playCard(handPos, -1, -1, -1, &G);
+                    //obtain starting point
+                    startDeckCount = G.deckCount[p];
+                    startDiscardCount = G.discardCount[p];
+                    startHandCount = G.handCount[p];
+                    startHandSmithies = cardCount(G.hand[p], smithy, G.handCount[p]);
 
-                    printf("play card should return an error\n"); 
-                    oracle(r, -1);
+                    printf("STARTING CONDITIONS\n"
+                            "player: %d\n"
+                            "deck count: %d\n"
+                            "discard count: %d\n"
+                            "hand count: %d\n"
+                            "hand smithies: %d\n",
+                            p, startDeckCount, startDiscardCount, startHandCount, startHandSmithies);
+                    
+                    playCard(handPos, -1, -1, -1, &G);
+
+                    // should be 2 more than original hand count. draw 3 cards, discard
+                    // the Smithy card.
+                    printf("\n");
+                    printf("hand count should increase by deck and discard counts and subtract 1 for losing smithy card\n"); 
+                    oracle(G.handCount[p], startHandCount - 1 + startDiscardCount + startDeckCount);
+                    printf("\n");
+
+                    // should be what's left after drawing 3 cards 
+                    printf("deck count should be 0\n"); 
+                    oracle(G.deckCount[p], 0);
+                    printf("\n");
+
+                    // should be 0 because it got taken for the deck
+                    printf("discard count should be 0\n"); 
+                    oracle(G.discardCount[p], 0);
+                    printf("\n");
+
+                    // smithy should not be in hand after playing it
+                    printf("smithy hand count should decrease by 1\n"); 
+                    oracle(cardCount(G.hand[p], smithy, G.handCount[p]), startHandSmithies - 1);
+                    printf("\n");
+
+                    // smithy should be in discard pile after playing it
+                    printf("smithy played cards count should be 1 for the one smithy card played\n"); 
+                    oracle(cardCount(G.playedCards, smithy, G.playedCardCount), 1);
                     printf("\n");
 
                     endTurn(&G);
