@@ -16,7 +16,7 @@ char *inputString()
 {
     int charPoolLen = 5;
     char * charPool = "rest\0";
-    int bigCharPoolLen = 26;
+    int bigCharPoolLen = 27;
     char * bigCharPool = "abcdefghijklmnopqrstuvwxyz\0";
     int retValLen = 6;
     char * ret_val = (char*)malloc(retValLen*sizeof(char));
