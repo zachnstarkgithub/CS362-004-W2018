@@ -203,7 +203,7 @@ int makeRandomGame(struct gameState *game)
     // the - 1 is so there's room for the smithy to be put here.
     game->playedCardCount = generateRandomBetween(0, MAX_DECK - 1);
 
-    smithyIndex = generateRandomBetween(0, game->handCount[p]);
+    smithyIndex = generateRandomBetween(0, game->handCount[p] - 1);
     game->hand[p][smithyIndex] = smithy;
 
     if(game->numActions <= 0)

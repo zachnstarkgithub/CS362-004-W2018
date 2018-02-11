@@ -207,7 +207,7 @@ int makeRandomGame(struct gameState *game)
     // the - 1 is so there's room for the village to be put here.
     game->playedCardCount = generateRandomBetween(0, MAX_DECK - 1);
 
-    villageIndex = generateRandomBetween(0, game->handCount[p]);
+    villageIndex = generateRandomBetween(0, game->handCount[p] - 1);
     game->hand[p][villageIndex] = village;
 
     if(game->numActions <= 0)
@@ -251,6 +251,11 @@ int main()
 
         // this means action phase
         prevG.phase = 0;
+
+        if(prevG.numActions == 770301311)
+        {
+            printf("AHHHHHHH WARNING\n");
+        }
 
         deepCopyPrevToPost(&prevG, &postG);
 
