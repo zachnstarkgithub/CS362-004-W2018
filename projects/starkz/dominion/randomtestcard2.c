@@ -252,11 +252,6 @@ int main()
         // this means action phase
         prevG.phase = 0;
 
-        if(prevG.numActions == 770301311)
-        {
-            printf("AHHHHHHH WARNING\n");
-        }
-
         deepCopyPrevToPost(&prevG, &postG);
 
         playCard(villageIndexInHand, -1, -1, -1, &postG);
