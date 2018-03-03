@@ -72,7 +72,6 @@ void cardNumToName(int card, char *name){
 
   default: strcpy(name,"?");
   }
-
 }
 
 
@@ -294,20 +293,26 @@ void selectKingdomCards(int randomSeed, int kingCards[NUM_K_CARDS]) {
  
 	
   while(numSelected < NUM_K_CARDS) {
+
     used = FALSE;
     card = floor(Random() * NUM_TOTAL_K_CARDS);
+
     if(card < adventurer) continue;
+
     for(i = 0; i < numSelected; i++) {
       if(kingCards[i] == card) {
-	used = TRUE;
-	break;
+	      used = TRUE;
+	      break;
       }
     }
+
     if(used == TRUE) continue;
     kingCards[numSelected] = card;
     numSelected++;
   }
 }
+
+
 
 
 int countHandCoins(int player, struct gameState *game) {
@@ -333,7 +338,7 @@ void executeBotTurn(int player, int *turnNum, struct gameState *game) {
 	
   printf("*****************Executing Bot Player %d Turn Number %d*****************\n", player, *turnNum);
   printSupply(game);	
-  //sleep(1); //Thinking...
+  sleep(1); //Thinking...
 	
   if(coins >= PROVINCE_COST && supplyCount(province,game) > 0) {
     buyCard(province,game);

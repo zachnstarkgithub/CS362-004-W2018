@@ -1,0 +1,38 @@
+ID: BUG 1
+Summmary: Playing Smithy only draws 1 card, not 3.
+
+Version: abreuj-assignment-2
+
+Severity: Medium (doesn't prevent game from being played, but it's wrong)
+Priority: High (it'd be embarassing if someone saw this, should be fixed now)
+
+Is it reproducible? Yes
+Compiler: gcc c99
+url: https://github.com/JamCamAbreu/CS362-004-W2018/blob/abreuj-assignment-4/projects/abreuj/
+
+How to reproduce:
+1. Initialize a game of dominion
+2. Acquire Smithy in hand
+3. Identify the number of cards in your hand
+4. Play Smithy card
+5. Verify that only one card was drawn
+
+ID: BUG 2
+Summary: Playing Village doesn't increase number of actions
+
+Version: abreuj-assignment-2
+
+Severity: Medium (doesn't prevent game from being played, but it's wrong)
+Priority: High (it'd be embarassing if someone saw this, should be fixed now)
+
+Is it reproducible? Yes
+Compiler: gcc c99
+url: https://github.com/JamCamAbreu/CS362-004-W2018/blob/abreuj-assignment-4/projects/abreuj/
+
+How to reproduce:
+1. Initialize a game of dominion
+2. Acquire Village in hand
+3. Identify the number of actions available
+4. Play Village card
+5. Verify that the number of actions didn't increase by 2
+
