@@ -76,7 +76,29 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c
 	cardtest4 >> unittestresults.out
 	gcov -b -c dominion.c >> unittestresults.out
 
-all: playdom player testDrawCard testBuyCard badTestDrawCard unittestresults.out
+random1: randomtestcard1.c dominion.o rngs.o
+	gcc -o random1 randomtestcard1.c -g dominion.o rngs.o $(CFLAGS)
+	
+	echo "Results for random test generator for Smithy" > randomtestcard1.out
+	random1 >> randomtestcard1.out
+	gcov -b -c dominion.c >> randomtestcard1.out
+
+random2: randomtestcard2.c dominion.o rngs.o
+	gcc -o random2 randomtestcard2.c -g dominion.o rngs.o $(CFLAGS)
+	
+	echo "Results for random test generator for Village" > randomtestcard2.out
+	random2 >> randomtestcard2.out
+	gcov -b -c dominion.c >> randomtestcard2.out
+
+random3: randomtestadventurer.c dominion.o rngs.o
+	gcc -o random3 randomtestadventurer.c -g dominion.o rngs.o $(CFLAGS)
+	
+	echo "Results for random test generator for Adventurer" > randomtestadventurer.out
+	random3 >> randomtestadventurer.out
+	gcov -b -c dominion.c >> randomtestadventurer.out
+
+all: playdom player testDrawCard testBuyCard badTestDrawCard random1 random2 random3 unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe badTestDrawCard unittest1 unittest2 unittest3 unittest4 unittestresults.out cardtest1 cardtest2 cardtest3 cardtest4
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe random1 badTestDrawCard random2 random3 randomtestcard1.out randomtestcard2.out randomtestadventurer.out unittest1 unittest2 unittest3 unittest4 unittestresults.out cardtest1 cardtest2 cardtest3 cardtest4
+
