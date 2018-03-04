@@ -302,6 +302,8 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
     initializeGame(numPlayers, kingdoms, seed, &G);
 
+    int numCardsDrawn = 3;
+
     int newDeckCounts1[2] = {1, 0};
     int newHandCounts1[3] = {MAX_HAND - 2, 5, 1};
     int newDiscardCounts1[2] = {1, 0};
@@ -339,6 +341,14 @@ int main(){
                     
                     playCard(handPos, -1, -1, -1, &G);
 
+                    numCardsDrawn = deckCounts[i] + discardCounts[k];
+                    for(r = G.handCount[p] - numCardsDrawn; r < G.handCount[p]; r++)
+                    {
+                        if(EQ(G.hand[p][r], smithy))
+                        {
+                            startHandSmithies++;
+                        }
+                    }
                     // should be 2 more than original hand count. draw 3 cards, discard
                     // the Smithy card.
                     printf("\n");

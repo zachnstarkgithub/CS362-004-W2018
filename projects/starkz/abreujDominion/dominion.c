@@ -719,7 +719,7 @@ int getCost(int cardNumber) {
 void smithyEffect(int currentPlayer, struct gameState* state, int handPos) {
   int i;
     //+3 Cards
-    for (i = 0; i < 3; i++);  // bug: added semi-colon to for loop, so below only runs once
+    for (i = 0; i < 3; i++)  // bug: added semi-colon to for loop, so below only runs once
         drawCard(currentPlayer, state);
     
     //discard card from hand
