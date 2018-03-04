@@ -8,6 +8,7 @@ Priority: High (it'd be embarassing if someone saw this, should be fixed now)
 
 Is it reproducible? Yes
 Compiler: gcc c99
+OS: OSU Linux surver via Putty
 url: https://github.com/JamCamAbreu/CS362-004-W2018/blob/abreuj-assignment-4/projects/abreuj/
 
 How to reproduce:
@@ -16,6 +17,9 @@ How to reproduce:
 3. Identify the number of cards in your hand
 4. Play Smithy card
 5. Verify that only one card was drawn
+
+Contact Information:
+email: starkz@oregonstate.edu
 
 ID: BUG 2
 Summary: Playing Village doesn't increase number of actions
@@ -27,6 +31,7 @@ Priority: High (it'd be embarassing if someone saw this, should be fixed now)
 
 Is it reproducible? Yes
 Compiler: gcc c99
+OS: OSU Linux surver via Putty
 url: https://github.com/JamCamAbreu/CS362-004-W2018/blob/abreuj-assignment-4/projects/abreuj/
 
 How to reproduce:
@@ -35,4 +40,7 @@ How to reproduce:
 3. Identify the number of actions available
 4. Play Village card
 5. Verify that the number of actions didn't increase by 2
+
+Contact Information:
+email: starkz@oregonstate.edu
 
